@@ -1,0 +1,41 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" 
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+<!--
+	private int dpid;
+	private int pr;
+	private int match_op;
+	private String match_exp;
+	private int match_len;
+	private String subst_exp;
+	private String repl_exp;
+	private String attrs;
+-->
+	
+  <field name="match_exp">
+      <field-validator type="requiredstring">
+           <message >Calling line number is required.</message>
+      </field-validator>
+        
+  </field>
+  <field name="subst_exp">
+      <field-validator type="requiredstring">
+         <message>Subaddress is required.</message>
+     </field-validator>
+  </field>
+
+<field name="repl_exp">
+      <field-validator type="requiredstring">
+         <message>Replacement expression is required.</message>
+     </field-validator>
+  </field>
+
+
+<field name="attrs">
+      <field-validator type="requiredstring">
+         <message>Attributes are required.</message>
+     </field-validator>
+  </field>
+</validators>

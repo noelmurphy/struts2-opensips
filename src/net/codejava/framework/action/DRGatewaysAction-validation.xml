@@ -1,0 +1,22 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" 
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	
+  <field name="address">
+      <field-validator type="requiredstring">
+           <message >address is required.</message>
+      </field-validator>
+        
+  </field>
+  <field name="pri_prefix">
+      <field-validator type="requiredstring">
+         <message>pri_prefix is required.</message>
+     </field-validator>
+  </field>
+  <field name="attrs">
+      <field-validator type="requiredstring">
+         <message>attrs is required.</message>
+     </field-validator>
+  </field>
+</validators>

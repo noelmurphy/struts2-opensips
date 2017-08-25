@@ -1,0 +1,29 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" 
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+<!--
+	private Long ruleid;
+	private String groupid;
+	private String prefix;
+	private String timerec;
+	private int priority;
+	private int routeid;
+	private String gwlist;
+	private String description;
+-->
+	
+  <field name="groupid">
+      <field-validator type="groupid">
+           <message >groupid is required.</message>
+      </field-validator>
+        
+  </field>
+  <field name="prefix">
+      <field-validator type="prefix">
+         <message>prefix is required.</message>
+     </field-validator>
+  </field>
+
+</validators>

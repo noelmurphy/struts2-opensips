@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" > 
+<log4j:configuration> 
+
+    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}/logs/StrutsSpringHibernateSipsH3.log" />
+        <param name="MaxFileSize" value="5MB" />
+        <param name="MaxBackupIndex" value="100" />
+        <param name="Append" value="true" />
+        <param name="Threshold" value="DEBUG" />        
+        <layout class="org.apache.log4j.PatternLayout"></layout>
+    </appender>
+
+        <appender name="stdout" class="org.apache.log4j.ConsoleAppender"> 
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy.MM.dd.HH.mm.ss.SSS} %p %t %c %L - %m%n" />
+        </layout>
+        </appender> 
+
+        <category name="net.codejava.framework">
+        	<priority value="DEBUG" />
+    	</category>
+
+    	<category name="org.springframework">
+        	<priority value="DEBUG" />
+    	</category>
+
+    	<category name="org.hibernate.SessionFactory">
+        	<priority value="DEBUG" />
+    	</category>
+
+		<category name="com.opensymphony.xwork2">
+        	<priority value="DEBUG" />
+    	</category>
+    	
+        <root> 
+                <priority value="INFO"></priority> 
+                <appender-ref ref="FILE"/> 
+                <appender-ref ref="SYSLOG"/> 
+                <!-- <appender-ref ref="stdout"/>  -->
+        </root> 
+</log4j:configuration>

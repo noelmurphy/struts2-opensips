@@ -1,0 +1,22 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" 
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	
+  <field name="username">
+      <field-validator type="requiredstring">
+           <message >username is required.</message>
+      </field-validator>
+        
+  </field>
+  <field name="domain">
+      <field-validator type="requiredstring">
+         <message>domain is required.</message>
+     </field-validator>
+  </field>
+  <field name="groupid">
+      <field-validator type="requiredstring">
+         <message>groupid is required.</message>
+     </field-validator>
+  </field>
+</validators>

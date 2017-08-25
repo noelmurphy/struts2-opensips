@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/opensipsold</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="connection.password">h1gg1ns</property>
+		<property name="connection.pool_size">1</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">true</property>
+		<property name="connection.autoReconnect">true</property>
+    	<property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+    	<property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+    	<property name="current_session_context_class">thread</property>
+    	<property name="hibernate.show_sql">false</property>
+		<!--  <property name="hbm2ddl.auto">create</property> -->
+		<mapping class="net.codejava.framework.model.Trusted" />
+		<mapping class="net.codejava.framework.model.Dialplan" />
+		<mapping class="net.codejava.framework.model.DRGroups" />
+		<mapping class="net.codejava.framework.model.DRRules" />
+		<mapping class="net.codejava.framework.model.DRGateways" />
+		<mapping class="net.codejava.framework.model.Blocked" />
+		<mapping class="net.codejava.framework.model.User" />
+		<mapping class="net.codejava.framework.model.UserRole" />
+		<mapping class="net.codejava.framework.model.Activate" />
+	</session-factory>
+</hibernate-configuration>

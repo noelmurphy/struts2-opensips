@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.ui.theme" value="simple"/>
+	<package name="default" extends="hibernate-default">
+	
+	 <global-results>
+  		  <result name="error">/WEB-INF/views/Error.jsp</result>
+  	</global-results>
+  		
+    <global-exception-mappings>
+       <exception-mapping exception="java.lang.Exception" result="error"/>
+    </global-exception-mappings>
+
+	<action name="doLogin" class="net.codejava.framework.action.UserAction" method="login">
+		<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="error">Login.jsp</result>
+			<result name="input">Login.jsp</result>
+			<result name="success">StartPage.jsp</result>
+			<result name="list">Login.jsp</result>
+		</action>
+	
+	<action name="doLogout" class="net.codejava.framework.action.UserAction" method="logout">
+	<result name="success">Login.jsp</result>
+	<result name="error">Login.jsp</result>
+	<result name="input">Login.jsp</result>
+	</action>
+
+		
+    <action name="listUsers" class="net.codejava.framework.action.UserAction" method="list">
+			<result name="input">CreateUser.jsp</result>
+			<result name="success">CreateUser.jsp</result>
+			<result name="list">CreateUser.jsp</result>
+		</action>
+
+    <action name="createUser" class="net.codejava.framework.action.UserAction" method="create">
+    		<result name="input">CreateUser.jsp</result>		
+			<result name="success" type="redirectAction">listUsers</result>		
+			<result name="list">CreateUser.jsp</result>
+			<result name="permfail">CreateUser.jsp</result>
+			</action>
+			
+	<action name="deleteUser" class="net.codejava.framework.action.UserAction" method="delete" >
+			<result name="input">CreateUser.jsp</result>		
+			<result name="success" type="redirectAction">listUsers</result>		
+	</action>
+		
+		<!-- trusted -->
+		<action name="listTrusted" class="net.codejava.framework.action.TrustedAction" method="list">
+			<result name="input">/WEB-INF/views/TrustedList.jsp</result>
+			<result name="success">/WEB-INF/views/TrustedList.jsp</result>
+			<result name="list">/WEB-INF/views/TrustedList.jsp</result>
+		</action>
+		
+		<action name="addTrusted" class="net.codejava.framework.action.TrustedAction" method="addTrusted" >
+			<result name="input">/WEB-INF/views/TrustedList.jsp</result>
+		    <result name="success">/WEB-INF/views/TrustedList.jsp</result>
+		</action>
+		
+		<!-- // -->
+		<action name="saveOrUpdateTrusted" class="net.codejava.framework.action.TrustedAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/TrustedList.jsp</result>
+		    <result name="success" type="chain">saveOrUpdateBillingCustomer</result>
+		</action>
+		
+
+		
+		<action name="editTrusted" class="net.codejava.framework.action.TrustedAction" method="edit" >
+			<result name="input">/WEB-INF/views/TrustedList.jsp</result>
+		    <result name="success">/WEB-INF/views/TrustedList.jsp</result>
+		</action>
+		
+		<action name="deleteTrusted" class="net.codejava.framework.action.TrustedAction" method="delete" >
+			<result name="input">/WEB-INF/views/TrustedList.jsp</result>
+		    <result name="success">/WEB-INF/views/TrustedList.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateBillingCustomer" class="net.codejava.framework.action.BillingCustomersAction" method="saveOrUpdate" >
+			<result name="input">/WEB-INF/views/TrustedList.jsp</result>
+		    <result name="success">/WEB-INF/views/TrustedList.jsp</result>
+		</action>
+		<!-- Dialplan -->
+		<action name="searchDialplan" class="net.codejava.framework.action.DialplanAction" method="search">
+			<result name="input">/WEB-INF/views/DialplanList.jsp</result>
+			<result name="success">/WEB-INF/views/DialplanList.jsp</result>
+			<result name="list">/WEB-INF/views/DialplanList.jsp</result>
+		</action>
+		
+		
+		<action name="listDialplan" class="net.codejava.framework.action.DialplanAction" method="list">
+			<result name="input">/WEB-INF/views/DialplanList.jsp</result>
+			<result name="success">/WEB-INF/views/DialplanList.jsp</result>
+			<result name="list">/WEB-INF/views/DialplanList.jsp</result>
+		</action>
+				
+		<action name="addDialplan" class="net.codejava.framework.action.DialplanAction" method="addDialplan" >
+			<result name="input">/WEB-INF/views/DialplanList.jsp</result>
+		    <result name="success">/WEB-INF/views/DialplanList.jsp</result>
+		</action>
+
+		<action name="dialplanReload" class="net.codejava.framework.action.DialplanAction" method="doReload">
+			<result name="input">${url}</result>
+		    <result name="success">${url}</result>
+		</action>
+		
+		<action name="blockedReload" class="net.codejava.framework.action.BlockedAction" method="doReload">
+			<result name="input">${url}</result>
+		    <result name="success">${url}</result>
+		</action>
+		
+		<action name="drGroupsReload" class="net.codejava.framework.action.DRGatewaysAction" method="doReload">
+			<result name="input">${url}</result>
+		    <result name="success">${url}</result>
+		</action>
+		
+		<action name="drRulesReload" class="net.codejava.framework.action.DRGroupsAction" method="doReload">
+			<result name="input">${url}</result>
+		    <result name="success">${url}</result>
+		</action>
+		
+		<action name="drGatewaysReload" class="net.codejava.framework.action.DRRulesAction" method="doReload">
+			<result name="input">${url}</result>
+		    <result name="success">${url}</result>
+		</action>
+		
+		<action name="quotaReload" class="net.codejava.framework.action.QuotaAction" method="doReload">
+			<result name="input">${url}</result>
+		    <result name="success">${url}</result>
+		</action>
+		
+		<action name="saveOrUpdateDialplan" class="net.codejava.framework.action.DialplanAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/DialplanList.jsp</result>
+		    <result name="success">/WEB-INF/views/DialplanList.jsp</result>
+		</action>
+		
+		<action name="editDialplan" class="net.codejava.framework.action.DialplanAction" method="edit" >
+			<result name="input">/WEB-INF/views/DialplanList.jsp</result>
+		    <result name="success">/WEB-INF/views/DialplanList.jsp</result>
+		</action>
+		
+		<action name="deleteDialplan" class="net.codejava.framework.action.DialplanAction" method="delete" >
+			<result name="input">/WEB-INF/views/DialplanList.jsp</result>
+		    <result name="success">/WEB-INF/views/DialplanList.jsp</result>
+		</action>
+		
+		<!-- DRGroups -->
+		<action name="listDRGroups" class="net.codejava.framework.action.DRGroupsAction" method="list">
+			<result name="input">/WEB-INF/views/DRGroupsList.jsp</result>
+			<result name="success">/WEB-INF/views/DRGroupsList.jsp</result>
+			<result name="list">/WEB-INF/views/DRGroupsList.jsp</result>
+		</action>
+				
+		<action name="addDRGroups" class="net.codejava.framework.action.DRGroupsAction" method="addDRGroups" >
+			<result name="input">/WEB-INF/views/DRGroupsList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGroupsList.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateDRGroups" class="net.codejava.framework.action.DRGroupsAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/DRGroupsList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGroupsList.jsp</result>
+		</action>
+		
+		<action name="editDRGroups" class="net.codejava.framework.action.DRGroupsAction" method="edit" >
+			<result name="input">/WEB-INF/views/DRGroupsList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGroupsList.jsp</result>
+		</action>
+		
+		<action name="deleteDRGroups" class="net.codejava.framework.action.DRGroupsAction" method="delete" >
+			<result name="input">/WEB-INF/views/DRGroupsList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGroupsList.jsp</result>
+		</action>
+		
+		<!-- DRRules -->
+		<action name="listDRRules" class="net.codejava.framework.action.DRRulesAction" method="list">
+			<result name="input">/WEB-INF/views/DRRulesList.jsp</result>
+			<result name="success">/WEB-INF/views/DRRulesList.jsp</result>
+			<result name="list">/WEB-INF/views/DRRulesList.jsp</result>
+		</action>
+				
+		<action name="addDRRules" class="net.codejava.framework.action.DRRulesAction" method="addDRRules" >
+			<result name="input">/WEB-INF/views/DRRulesList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRRulesList.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateDRRules" class="net.codejava.framework.action.DRRulesAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/DRRulesList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRRulesList.jsp</result>
+		</action>
+		
+		<action name="editDRRules" class="net.codejava.framework.action.DRRulesAction" method="edit" >
+			<result name="input">/WEB-INF/views/DRRulesList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRRulesList.jsp</result>
+		</action>
+		
+		<action name="deleteDRRules" class="net.codejava.framework.action.DRRulesAction" method="delete" >
+			<result name="input">/WEB-INF/views/DRRulesList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRRulesList.jsp</result>
+		</action>
+		
+		<!-- DRGateways -->
+		<action name="listDRGateways" class="net.codejava.framework.action.DRGatewaysAction" method="list">
+			<result name="input">/WEB-INF/views/DRGatewaysList.jsp</result>
+			<result name="success">/WEB-INF/views/DRGatewaysList.jsp</result>
+			<result name="list">/WEB-INF/views/DRGatewaysList.jsp</result>
+		</action>
+				
+		<action name="addDRGateways" class="net.codejava.framework.action.DRGatewaysAction" method="addDRGateways" >
+			<result name="input">/WEB-INF/views/DRGatewaysList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGatewaysList.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateDRGateways" class="net.codejava.framework.action.DRGatewaysAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/DRGatewaysList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGatewaysList.jsp</result>
+		</action>
+		
+		<action name="editDRGateways" class="net.codejava.framework.action.DRGatewaysAction" method="edit" >
+			<result name="input">/WEB-INF/views/DRGatewaysList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGatewaysList.jsp</result>
+		</action>
+		
+		<action name="deleteDRGateways" class="net.codejava.framework.action.DRGatewaysAction" method="delete" >
+			<result name="input">/WEB-INF/views/DRGatewaysList.jsp</result>
+		    <result name="success">/WEB-INF/views/DRGatewaysList.jsp</result>
+		</action>
+		
+		<!-- Blocked -->
+		<action name="listBlocked" class="net.codejava.framework.action.BlockedAction" method="list">
+			<result name="input">/WEB-INF/views/BlockedList.jsp</result>
+			<result name="success">/WEB-INF/views/BlockedList.jsp</result>
+			<result name="list">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+				
+		<action name="addBlocked" class="net.codejava.framework.action.BlockedAction" method="addBlocked" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/BlockedList.jsp</result>
+		    <result name="success">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+		
+		<action name="updateBlocked" class="net.codejava.framework.action.BlockedAction" method="updateBlocked" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/BlockedEdit.jsp</result>
+		    <result name="success">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateBlocked" class="net.codejava.framework.action.BlockedAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/BlockedList.jsp</result>
+		    <result name="success">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+		
+		<action name="editBlocked" class="net.codejava.framework.action.BlockedAction" method="edit" >
+			<result name="edit">/WEB-INF/views/BlockedEdit.jsp</result>
+			<result name="input">/WEB-INF/views/BlockedEdit.jsp</result>
+		    <result name="success">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+		
+		<action name="deleteBlocked" class="net.codejava.framework.action.BlockedAction" method="delete" >
+			<result name="input">/WEB-INF/views/BlockedList.jsp</result>
+		    <result name="success">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+		
+		<action name="searchBlocked" class="net.codejava.framework.action.BlockedAction" method="search">
+			<result name="input">/WEB-INF/views/BlockedList.jsp</result>
+			<result name="success">/WEB-INF/views/BlockedList.jsp</result>
+			<result name="list">/WEB-INF/views/BlockedList.jsp</result>
+		</action>
+		
+		<!-- Quote -->
+		<action name="listQuota" class="net.codejava.framework.action.QuotaAction" method="list">
+			<result name="input">/WEB-INF/views/QuotaList.jsp</result>
+			<result name="success">/WEB-INF/views/QuotaList.jsp</result>
+			<result name="list">/WEB-INF/views/QuotaList.jsp</result>
+		</action>
+				
+		<action name="addQuota" class="net.codejava.framework.action.QuotaAction" method="addQuota" >
+			<result name="input">/WEB-INF/views/QuotaList.jsp</result>
+		    <result name="success">/WEB-INF/views/QuotaList.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateQuota" class="net.codejava.framework.action.QuotaAction" method="saveOrUpdate" >
+			<interceptor-ref name="defaultStackHibernateStrutsValidation"></interceptor-ref>
+			<result name="input">/WEB-INF/views/QuotaList.jsp</result>
+		    <result name="success">/WEB-INF/views/QuotaList.jsp</result>
+		</action>
+		
+		<action name="editQuota" class="net.codejava.framework.action.QuotaAction" method="edit" >
+			<result name="input">/WEB-INF/views/QuotaList.jsp</result>
+		    <result name="success">/WEB-INF/views/QuotaList.jsp</result>
+		</action>
+		
+		<action name="deleteQuota" class="net.codejava.framework.action.QuotaAction" method="delete" >
+			<result name="input">/WEB-INF/views/QuotaList.jsp</result>
+		    <result name="success">/WEB-INF/views/QuotaList.jsp</result>
+		</action>
+	</package>
+
+</struts>
